@@ -106,7 +106,7 @@ def depthFirstSearch(problem):
     # Location and path
     DataQueue.push((StartNode, []))
     # This while loop checks whether out DataQueue is empty or not
-    while not DataQueue.isEmpty():
+    while True:
         # Here I am storing the location and path value
         data = DataQueue.pop()
         currentNode = data[0]
@@ -125,6 +125,10 @@ def depthFirstSearch(problem):
             for values in problem.getSuccessors(currentNode):
                 tempMoves = moves + [values[1]]
                 DataQueue.push((values[0], tempMoves))
+
+        # if DataQueue is empty get out of while loop
+        if DataQueue.isEmpty():
+            break
 
     util.raiseNotDefined()
 
@@ -144,7 +148,7 @@ def breadthFirstSearch(problem):
     # Location and path
     DataQueue.push((StartNode, []))
     # This while loop checks whether out DataQueue is empty or not
-    while not DataQueue.isEmpty():
+    while True:
         # Here I am storing the location and path value
         data = DataQueue.pop()
         currentNode = data[0]
@@ -164,6 +168,9 @@ def breadthFirstSearch(problem):
                 tempMoves = moves + [values[1]]
                 DataQueue.push((values[0], tempMoves))
 
+        # if DataQueue is empty get out of while loop
+        if DataQueue.isEmpty():
+            break
     util.raiseNotDefined()
 
 def uniformCostSearch(problem):
