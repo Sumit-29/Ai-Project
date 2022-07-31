@@ -13,6 +13,8 @@
 
 
 # imports from python standard library
+import cgi, html
+cgi.escape = html.escape
 import grading
 import imp
 import optparse

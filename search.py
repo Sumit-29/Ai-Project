@@ -74,7 +74,6 @@ def tinyMazeSearch(problem):
 
 def depthFirstSearch(problem):
     """
-    Hi
     Search the deepest nodes in the search tree first.
 
     Your search algorithm needs to return a list of actions that reaches the
@@ -87,12 +86,84 @@ def depthFirstSearch(problem):
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
+
     "*** YOUR CODE HERE ***"
+    """
+    Start: (5, 5)
+    Is the start a goal? False
+    Start's successors: [((5, 4), 'South', 1), ((4, 5), 'West', 1)]
+
+    """
+    # Making my DataQueue a stack
+    DataQueue = util.Stack()
+    # Storing the starting value in  StartNode
+    StartNode = problem.getStartState()
+    # Checking if StartNode is our final node
+    if problem.isGoalState(StartNode):
+        return []
+    # Storing the Visited locations to VisitedNodes
+    visitedNodes = set()
+    # Location and path
+    DataQueue.push((StartNode, []))
+    # This while loop checks whether out DataQueue is empty or not
+    while not DataQueue.isEmpty():
+        # Here I am storing the location and path value
+        data = DataQueue.pop()
+        currentNode = data[0]
+        moves = data[1]
+
+        # Checking currentNode value in visitedNodes
+        if currentNode not in visitedNodes:
+            # Adding the currentNode value in visitedNode
+            visitedNodes.add(currentNode)
+
+            # Checking if currentNode is our final node
+            if problem.isGoalState(currentNode):
+                return moves
+
+            # This loop helps to update location and path which helps to move the pacman
+            for values in problem.getSuccessors(currentNode):
+                tempMoves = moves + [values[1]]
+                DataQueue.push((values[0], tempMoves))
+
     util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
+
+    # Making my DataQueue a Queue
+    DataQueue = util.Queue()
+    # Storing the starting value in  StartNode
+    StartNode = problem.getStartState()
+    # Checking if StartNode is our final node
+    if problem.isGoalState(StartNode):
+        return []
+    # Storing the Visited locations to VisitedNodes
+    visitedNodes = set()
+    # Location and path
+    DataQueue.push((StartNode, []))
+    # This while loop checks whether out DataQueue is empty or not
+    while not DataQueue.isEmpty():
+        # Here I am storing the location and path value
+        data = DataQueue.pop()
+        currentNode = data[0]
+        moves = data[1]
+
+        # Checking currentNode value in visitedNodes
+        if currentNode not in visitedNodes:
+            # Adding the currentNode value in visitedNode
+            visitedNodes.add(currentNode)
+
+            # Checking if currentNode is our final node
+            if problem.isGoalState(currentNode):
+                return moves
+
+            # This loop helps to update location and path which helps to move the pacman
+            for values in problem.getSuccessors(currentNode):
+                tempMoves = moves + [values[1]]
+                DataQueue.push((values[0], tempMoves))
+
     util.raiseNotDefined()
 
 def uniformCostSearch(problem):
